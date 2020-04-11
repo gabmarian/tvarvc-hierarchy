@@ -39,5 +39,4 @@ interface ZIF_TVARVC_VARIABLE_COLLECTION
   methods SAVE
     raising
       ZCX_TVARVC_OPERATION_FAILURE .
-
 endinterface.

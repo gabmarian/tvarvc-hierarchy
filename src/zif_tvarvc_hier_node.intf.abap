@@ -1,99 +1,103 @@
-INTERFACE zif_tvarvc_hier_node
-  PUBLIC .
+interface ZIF_TVARVC_HIER_NODE
+  public .
 
-  TYPES:
-    status(1) TYPE c.
 
-  CONSTANTS BEGIN OF statuses.
+  types:
+    status(1) TYPE c .
+
+  constants:
+    BEGIN OF statuses.
   CONSTANTS saved    TYPE status VALUE ' '.
   CONSTANTS created  TYPE status VALUE 'C'.
   CONSTANTS modified TYPE status VALUE 'M'.
   CONSTANTS deleted  TYPE status VALUE 'D'.
-  CONSTANTS END OF statuses.
+  CONSTANTS END OF statuses .
 
-  EVENTS created .
-  EVENTS changed .
-  EVENTS deleted .
+  events CREATED .
+  events CHANGED .
+  events DELETED .
 
-  METHODS add_child
-    IMPORTING
-      !node TYPE REF TO zif_tvarvc_hier_node
-    RAISING
-      zcx_tvarvc_error .
-  METHODS count_subnodes
-    IMPORTING
-      !depth       TYPE zif_tvarvc_hier_node_iterator=>depth DEFAULT zif_tvarvc_hier_node_iterator=>depth_all_subnodes
-    RETURNING
-      VALUE(count) TYPE i .
-  METHODS create_child
-    IMPORTING
-      !name        TYPE ztvarvc_hier-node_name
-      !attributes  TYPE ztvarvc_node_attributes OPTIONAL
-    RETURNING
-      VALUE(child) TYPE REF TO zif_tvarvc_hier_node
-    RAISING
-      zcx_tvarvc_error .
-  METHODS create_iterator
-    IMPORTING
-      !depth          TYPE zif_tvarvc_hier_node_iterator=>depth DEFAULT zif_tvarvc_hier_node_iterator=>depth_all_subnodes
-    RETURNING
-      VALUE(iterator) TYPE REF TO zif_tvarvc_hier_node_iterator .
-  METHODS get_attributes
-    RETURNING
-      VALUE(attributes) TYPE ztvarvc_node_attributes .
-  METHODS get_modification_info
-    RETURNING
-      VALUE(history) TYPE ztvarvc_node_history.
-  METHODS get_child
-    IMPORTING
-      !name        TYPE csequence OPTIONAL
-      !index       TYPE i OPTIONAL
-        PREFERRED PARAMETER index
-    RETURNING
-      VALUE(child) TYPE REF TO zif_tvarvc_hier_node .
-  METHODS get_documentation
-    RETURNING
-      VALUE(text) TYPE string .
-  METHODS get_documentation_raw
-    RETURNING
-      VALUE(docu_xstring) TYPE xstring .
-  METHODS get_id
-    RETURNING
-      VALUE(id) TYPE string .
-  METHODS get_name
-    RETURNING
-      VALUE(name) TYPE string .
-  METHODS get_parent
-    RETURNING
-      VALUE(parent) TYPE REF TO zif_tvarvc_hier_node .
-  METHODS get_status
-    RETURNING
-      VALUE(status) TYPE status.
-  METHODS is_leaf
-    RETURNING
-      VALUE(leaf) TYPE abap_bool .
-  METHODS remove_child
-    IMPORTING
-      !name  TYPE csequence OPTIONAL
-      !index TYPE i OPTIONAL
-        PREFERRED PARAMETER index
-    RAISING
-      zcx_tvarvc_error .
-  METHODS rename
-    IMPORTING
-      !new_name   TYPE csequence
-    RETURNING
-      VALUE(self) TYPE REF TO zif_tvarvc_hier_node
-    RAISING
-      zcx_tvarvc_error .
-  METHODS set_attributes
-    IMPORTING
-      !attributes TYPE ztvarvc_node_attributes
-    RETURNING
-      VALUE(self) TYPE REF TO zif_tvarvc_hier_node .
-  METHODS set_documentation
-    IMPORTING
-      !text       TYPE string
-    RETURNING
-      VALUE(self) TYPE REF TO zif_tvarvc_hier_node .
-ENDINTERFACE.
+  methods COUNT_SUBNODES
+    importing
+      !DEPTH type ZIF_TVARVC_HIER_NODE_ITERATOR=>DEPTH default ZIF_TVARVC_HIER_NODE_ITERATOR=>DEPTH_ALL_SUBNODES
+    returning
+      value(COUNT) type I .
+  methods CREATE_CHILD
+    importing
+      !NAME type ZTVARVC_HIER-NODE_NAME
+      !ATTRIBUTES type ZTVARVC_NODE_ATTRIBUTES optional
+    returning
+      value(CHILD) type ref to ZIF_TVARVC_HIER_NODE
+    raising
+      ZCX_TVARVC_ERROR .
+  methods CREATE_ITERATOR
+    importing
+      !DEPTH type ZIF_TVARVC_HIER_NODE_ITERATOR=>DEPTH default ZIF_TVARVC_HIER_NODE_ITERATOR=>DEPTH_ALL_SUBNODES
+    returning
+      value(ITERATOR) type ref to ZIF_TVARVC_HIER_NODE_ITERATOR .
+  methods GET_ATTRIBUTES
+    returning
+      value(ATTRIBUTES) type ZTVARVC_NODE_ATTRIBUTES .
+  methods GET_MODIFICATION_INFO
+    returning
+      value(HISTORY) type ZTVARVC_NODE_HISTORY .
+  methods GET_CHILD
+    importing
+      !NAME type CSEQUENCE optional
+      !INDEX type I optional
+    preferred parameter INDEX
+    returning
+      value(CHILD) type ref to ZIF_TVARVC_HIER_NODE .
+  methods GET_DOCUMENTATION
+    returning
+      value(TEXT) type STRING .
+  methods GET_DOCUMENTATION_RAW
+    returning
+      value(DOCU_XSTRING) type XSTRING .
+  methods GET_ID
+    returning
+      value(ID) type STRING .
+  methods GET_NAME
+    returning
+      value(NAME) type STRING .
+  methods GET_PARENT
+    returning
+      value(PARENT) type ref to ZIF_TVARVC_HIER_NODE .
+  methods GET_STATUS
+    returning
+      value(STATUS) type STATUS .
+  methods IS_LEAF
+    returning
+      value(LEAF) type ABAP_BOOL .
+  methods REMOVE_CHILD
+    importing
+      !NAME type CSEQUENCE optional
+      !INDEX type I optional
+    preferred parameter INDEX
+    raising
+      ZCX_TVARVC_ERROR .
+  methods RENAME
+    importing
+      !NEW_NAME type CSEQUENCE
+    returning
+      value(SELF) type ref to ZIF_TVARVC_HIER_NODE
+    raising
+      ZCX_TVARVC_ERROR .
+  methods SET_ATTRIBUTES
+    importing
+      !ATTRIBUTES type ZTVARVC_NODE_ATTRIBUTES
+    returning
+      value(SELF) type ref to ZIF_TVARVC_HIER_NODE .
+  methods SET_DOCUMENTATION
+    importing
+      !TEXT type STRING
+    returning
+      value(SELF) type ref to ZIF_TVARVC_HIER_NODE .
+  methods SET_PARENT
+    importing
+      !NEW_PARENT type ref to ZIF_TVARVC_HIER_NODE
+    returning
+      value(SELF) type ref to ZIF_TVARVC_HIER_NODE
+    raising
+      ZCX_TVARVC_OPERATION_FAILURE .
+endinterface.

@@ -11,6 +11,26 @@
     <FIXPT>X</FIXPT>
     <UNICODE>X</UNICODE>
    </VSEOCLASS>
+   <DESCRIPTIONS>
+    <SEOCOMPOTX>
+     <CLSNAME>ZCL_TVARVC</CLSNAME>
+     <CMPNAME>GET_LIST</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Read select-option as a list (I,EQ,LOW)</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CLSNAME>ZCL_TVARVC</CLSNAME>
+     <CMPNAME>GET_PARAMETER</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Read value of a parameter</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CLSNAME>ZCL_TVARVC</CLSNAME>
+     <CMPNAME>GET_SELECT_OPTION</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Read values of a select-option</DESCRIPT>
+    </SEOCOMPOTX>
+   </DESCRIPTIONS>
   </asx:values>
  </asx:abap>
 </abapGit>

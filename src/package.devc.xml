@@ -5,6 +5,12 @@
    <DEVC>
     <CTEXT>TVARVC Hierarchy</CTEXT>
    </DEVC>
+   <PERMISSION>
+    <SCOMPPDTLN>
+     <INTF_NAME>SABAPDOCU_BROWSER</INTF_NAME>
+     <ERR_SEVER>NONE</ERR_SEVER>
+    </SCOMPPDTLN>
+   </PERMISSION>
   </asx:values>
  </asx:abap>
 </abapGit>

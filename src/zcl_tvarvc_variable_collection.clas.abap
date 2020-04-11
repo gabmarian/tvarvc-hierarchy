@@ -1,33 +1,14 @@
-CLASS zcl_tvarvc_variable_collection DEFINITION
-  PUBLIC
-  FINAL
-  CREATE PUBLIC .
+class ZCL_TVARVC_VARIABLE_COLLECTION definition
+  public
+  final
+  create public .
 
-  PUBLIC SECTION.
+public section.
 
-    INTERFACES zif_tvarvc_variable_collection .
+  interfaces ZIF_TVARVC_VARIABLE_COLLECTION .
   PROTECTED SECTION.
 
   PRIVATE SECTION.
-
-    TYPES BEGIN OF parameter_t.
-    TYPES name   TYPE tvarvc-name.
-    TYPES value  TYPE rvari_val_255.
-    TYPES edited TYPE abap_bool.
-    TYPES END OF parameter_t.
-
-    TYPES parameters_t TYPE HASHED TABLE OF parameter_t
-      WITH UNIQUE KEY name.
-
-    TYPES BEGIN OF select_option_t.
-    TYPES name   TYPE tvarvc-name.
-    TYPES type   TYPE tvarvc-type.
-    TYPES values TYPE zcl_tvarvc=>generic_range.
-    TYPES edited TYPE abap_bool.
-    TYPES END OF select_option_t.
-
-    TYPES select_options_t TYPE HASHED TABLE OF select_option_t
-      WITH UNIQUE KEY name.
 
     DATA: parameters     TYPE parameters_t,
           select_options TYPE select_options_t.
@@ -103,56 +84,62 @@ CLASS ZCL_TVARVC_VARIABLE_COLLECTION IMPLEMENTATION.
 
   METHOD zif_tvarvc_variable_collection~save.
 
-    " Todo - refactor, raise changed event with deleted and new entries
-    DATA: tvarvc TYPE tvarvc,
-          value  TYPE LINE OF zcl_tvarvc=>generic_range.
+    DATA: tvarvc_grouping   TYPE tvarvc_grouping,
+          entries_to_delete TYPE STANDARD TABLE OF tvarvc,
+          entries_to_modify TYPE STANDARD TABLE OF tvarvc,
+          entry             TYPE tvarvc,
+          tvarvc_keys       TYPE zif_tvarvc_variable_collection=>tvarvc_keys,
+          tvarvc_key        LIKE LINE OF tvarvc_keys.
 
+    " Get lines for db modifications
+    tvarvc_grouping = db_utility=>project_parameters( parameters ).
+    INSERT LINES OF tvarvc_grouping-entries_to_modify INTO TABLE entries_to_modify.
+    INSERT LINES OF tvarvc_grouping-entries_to_delete INTO TABLE entries_to_delete.
+
+    tvarvc_grouping = db_utility=>project_select_options( select_options ).
+    INSERT LINES OF tvarvc_grouping-entries_to_modify INTO TABLE entries_to_modify.
+    INSERT LINES OF tvarvc_grouping-entries_to_delete INTO TABLE entries_to_delete.
+
+    IF entries_to_modify IS INITIAL AND entries_to_delete IS INITIAL.
+      RETURN.
+    ENDIF.
+
+    " Execute db operation
+    DELETE tvarvc FROM TABLE entries_to_delete.
+
+    IF sy-subrc <> 0.
+      RAISE EXCEPTION TYPE zcx_tvarvc_operation_failure.
+    ENDIF.
+
+    MODIFY tvarvc FROM TABLE entries_to_modify.
+
+    IF sy-subrc <> 0.
+      RAISE EXCEPTION TYPE zcx_tvarvc_operation_failure.
+    ENDIF.
+
+    " Reset change flag
     LOOP AT parameters REFERENCE INTO DATA(parameter).
-
-      CHECK parameter->edited = abap_true.
-
-      DELETE FROM tvarvc WHERE name = parameter->name
-                           AND type = zcl_tvarvc=>kind-param.
-
-      CLEAR tvarvc.
-
-      tvarvc-name = parameter->name.
-      tvarvc-sign = zcl_tvarvc=>sign-in.
-      tvarvc-opti = zcl_tvarvc=>opti-eq.
-
-      MODIFY tvarvc FROM tvarvc.
-
       parameter->edited = abap_false.
-
     ENDLOOP.
 
-    LOOP AT select_options REFERENCE INTO DATA(select_option) WHERE edited = abap_true.
-
-      CHECK select_option->edited = abap_true.
-
-      DELETE FROM tvarvc WHERE name = select_option->name
-                           AND type = zcl_tvarvc=>kind-selopt.
-
-      CLEAR tvarvc.
-      tvarvc-name = select_option->name.
-      tvarvc-type = zcl_tvarvc=>kind-selopt.
-
-      LOOP AT select_option->values INTO value.
-
-        tvarvc-sign = value-sign.
-        tvarvc-opti = value-option.
-        tvarvc-low  = value-low.
-        tvarvc-high = value-high.
-
-        MODIFY tvarvc FROM tvarvc.
-
-        tvarvc-numb = tvarvc-numb + 1.
-
-      ENDLOOP.
-
+    LOOP AT select_options REFERENCE INTO DATA(select_option).
       select_option->edited = abap_false.
-
     ENDLOOP.
+
+    " Get keys of affected lines and raise changed event
+    LOOP AT entries_to_delete INTO entry.
+      tvarvc_key = CORRESPONDING #( entry ).
+      INSERT tvarvc_key INTO TABLE tvarvc_keys.
+    ENDLOOP.
+
+    LOOP AT entries_to_modify INTO entry.
+      tvarvc_key = CORRESPONDING #( entry ).
+      INSERT tvarvc_key INTO TABLE tvarvc_keys.
+    ENDLOOP.
+
+    RAISE EVENT zif_tvarvc_variable_collection~saved
+      EXPORTING
+        keys = tvarvc_keys.
 
   ENDMETHOD.
 

@@ -77,8 +77,14 @@ CLASS application IMPLEMENTATION.
     SET HANDLER handle_node_double_click  FOR ui_tree.
     SET HANDLER handle_link_click         FOR ui_tree.
     SET HANDLER handle_expand_no_children FOR ui_tree.
+    SET HANDLER handle_drag               FOR ui_tree.
+    SET HANDLER handle_drop               FOR ui_tree.
+    SET HANDLER handle_drop_completed     FOR ui_tree.
 
     ui_tree->create_tree_control( parent = cl_gui_container=>default_screen ).
+
+    " Init dragdrop object
+    tree_dragdrop = NEW #( ).
 
     " Add root and first level
     DATA(root) = hier_manager->get_root( ).
@@ -121,6 +127,8 @@ CLASS application IMPLEMENTATION.
     DATA(it) = node->create_iterator( zif_tvarvc_hier_node_iterator=>depth_direct_subnodes ).
     DATA(child) = it->get_next( ).
 
+    tree_dragdrop->get_handle( IMPORTING handle = DATA(dnd_handle) ).
+
     WHILE child IS BOUND.
 
       IF ui_tree->node_key_in_tree( child->get_id( ) ) = abap_false.
@@ -133,11 +141,10 @@ CLASS application IMPLEMENTATION.
             isfolder          = xsdbool( NOT child->is_leaf( ) )
             item_table        = hier_node_to_item_table( child )
             expander          = xsdbool( NOT child->is_leaf( ) )
-            user_object       = child ).
-*          EXCEPTIONS
-*            node_key_exists  = 0 ).
+            user_object       = child
+            drag_drop_id      = dnd_handle ).
 
-       ENDIF.
+      ENDIF.
 
       IF recursive = abap_true.
         expand_node( node = child recursive = abap_true ).
@@ -262,7 +269,7 @@ CLASS application IMPLEMENTATION.
     ENDIF.
 
     IF node->get_attributes( )-tvarv_name IS INITIAL.
-      MESSAGE 'No variable assignment exists' TYPE 'S'.
+      MESSAGE 'Selected entry has no assignment' TYPE 'S'.
       RETURN.
     ENDIF.
 
@@ -409,6 +416,21 @@ CLASS application IMPLEMENTATION.
     ENDIF.
 
     app->edit_mode_active = xsdbool( app->edit_mode_active = abap_false ).
+
+    " Activate/deactivate drag&drop
+    IF app->edit_mode_active = abap_true.
+
+      tree_dragdrop->add(
+        flavor     = 'Hierarchy'
+        dragsrc    = abap_true
+        droptarget = abap_true
+        effect     = cl_dragdrop=>move + cl_dragdrop=>copy ).
+
+    ELSE.
+
+      tree_dragdrop->remove( 'Hierarchy' ).
+
+    ENDIF.
 
   ENDMETHOD.
 
@@ -593,6 +615,50 @@ CLASS application IMPLEMENTATION.
     ENDLOOP.
 
     ui_tree->set_selected_node( node->get_id( ) ).
+
+  ENDMETHOD.
+
+  METHOD handle_drag.
+
+    DATA: info TYPE REF TO drag_drop_info.
+
+    info = NEW #( ).
+    info->dragged_node = get_node_by_key( node_key ).
+
+    drag_drop_object->object = info.
+
+  ENDMETHOD.
+
+  METHOD handle_drop.
+
+    DATA: info TYPE REF TO drag_drop_info.
+
+    info ?= drag_drop_object->object.
+    info->dropped_node = get_node_by_key( node_key ).
+
+  ENDMETHOD.
+
+  METHOD handle_drop_completed.
+
+    DATA: info TYPE REF TO drag_drop_info.
+
+    info ?= drag_drop_object->object.
+
+    " Reassign on application level
+    info->dragged_node->set_parent( info->dropped_node ).
+
+    " Reassign on UI level
+    ui_tree->delete_node( info->dragged_node->get_id( ) ).
+
+    ui_tree->add_node(
+        node_key          = info->dragged_node->get_id( )
+        relative_node_key = info->dropped_node->get_id( )
+        relationship      = cl_tree_model=>relat_last_child
+        isfolder          = xsdbool( NOT info->dragged_node->is_leaf( ) )
+        item_table        = hier_node_to_item_table( info->dragged_node )
+        user_object       = info->dragged_node ).
+
+   expand_node( info->dragged_node ).
 
   ENDMETHOD.
 

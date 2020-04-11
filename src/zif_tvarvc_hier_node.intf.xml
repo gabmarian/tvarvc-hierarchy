@@ -10,6 +10,134 @@
     <STATE>1</STATE>
     <UNICODE>X</UNICODE>
    </VSEOINTERF>
+   <DESCRIPTIONS>
+    <SEOCOMPOTX>
+     <CLSNAME>ZIF_TVARVC_HIER_NODE</CLSNAME>
+     <CMPNAME>CHANGED</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>The node has been changed</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CLSNAME>ZIF_TVARVC_HIER_NODE</CLSNAME>
+     <CMPNAME>COUNT_SUBNODES</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Count nodes in the subtree defined by the node</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CLSNAME>ZIF_TVARVC_HIER_NODE</CLSNAME>
+     <CMPNAME>CREATED</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>The node has been created</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CLSNAME>ZIF_TVARVC_HIER_NODE</CLSNAME>
+     <CMPNAME>CREATE_CHILD</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Create subordinate note</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CLSNAME>ZIF_TVARVC_HIER_NODE</CLSNAME>
+     <CMPNAME>CREATE_ITERATOR</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Create iterator for the tree defined by the node</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CLSNAME>ZIF_TVARVC_HIER_NODE</CLSNAME>
+     <CMPNAME>DELETED</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>The node has been deleted</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CLSNAME>ZIF_TVARVC_HIER_NODE</CLSNAME>
+     <CMPNAME>GET_ATTRIBUTES</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Get node attributes</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CLSNAME>ZIF_TVARVC_HIER_NODE</CLSNAME>
+     <CMPNAME>GET_CHILD</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Retrive child with the given name or index</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CLSNAME>ZIF_TVARVC_HIER_NODE</CLSNAME>
+     <CMPNAME>GET_DOCUMENTATION</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Get the node&apos;s documentation as a string</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CLSNAME>ZIF_TVARVC_HIER_NODE</CLSNAME>
+     <CMPNAME>GET_DOCUMENTATION_RAW</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Get the node&apos;s documentation in binary format</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CLSNAME>ZIF_TVARVC_HIER_NODE</CLSNAME>
+     <CMPNAME>GET_ID</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Get node&apos;s UUID</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CLSNAME>ZIF_TVARVC_HIER_NODE</CLSNAME>
+     <CMPNAME>GET_MODIFICATION_INFO</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Get creation and modification information</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CLSNAME>ZIF_TVARVC_HIER_NODE</CLSNAME>
+     <CMPNAME>GET_NAME</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Get the node&apos;s name (unique among siblings)</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CLSNAME>ZIF_TVARVC_HIER_NODE</CLSNAME>
+     <CMPNAME>GET_PARENT</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Get parent node</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CLSNAME>ZIF_TVARVC_HIER_NODE</CLSNAME>
+     <CMPNAME>GET_STATUS</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Get node status (created, modified, deleted)</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CLSNAME>ZIF_TVARVC_HIER_NODE</CLSNAME>
+     <CMPNAME>IS_LEAF</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Is the node leaf?</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CLSNAME>ZIF_TVARVC_HIER_NODE</CLSNAME>
+     <CMPNAME>REMOVE_CHILD</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Delete the whole subtree defined by the given child</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CLSNAME>ZIF_TVARVC_HIER_NODE</CLSNAME>
+     <CMPNAME>RENAME</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Assign a new name to the node</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CLSNAME>ZIF_TVARVC_HIER_NODE</CLSNAME>
+     <CMPNAME>SET_ATTRIBUTES</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Overwrite attributes structure</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CLSNAME>ZIF_TVARVC_HIER_NODE</CLSNAME>
+     <CMPNAME>SET_DOCUMENTATION</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Set the documentation from a string</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CLSNAME>ZIF_TVARVC_HIER_NODE</CLSNAME>
+     <CMPNAME>SET_PARENT</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Reassign the subtree defined by the node to a new parent</DESCRIPT>
+    </SEOCOMPOTX>
+   </DESCRIPTIONS>
   </asx:values>
  </asx:abap>
 </abapGit>

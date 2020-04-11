@@ -256,6 +256,10 @@ CLASS ZCL_TVARVC_HIER_MANAGER IMPLEMENTATION.
 
     ENDLOOP.
 
+    IF nodes_to_modify IS INITIAL AND nodes_to_delete IS INITIAL.
+      RETURN.
+    ENDIF.
+
     MODIFY ztvarvc_hier FROM TABLE nodes_to_modify.
 
     IF sy-subrc <> 0.

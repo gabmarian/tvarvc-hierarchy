@@ -55,10 +55,13 @@ CLASS zcl_tvarvc_hier_node DEFINITION
         !changed TYPE abap_bool OPTIONAL
         !deleted TYPE abap_bool OPTIONAL .
 
+private section.
 ENDCLASS.
 
 
-CLASS zcl_tvarvc_hier_node IMPLEMENTATION.
+
+CLASS ZCL_TVARVC_HIER_NODE IMPLEMENTATION.
+
 
   METHOD constructor.
 
@@ -77,6 +80,7 @@ CLASS zcl_tvarvc_hier_node IMPLEMENTATION.
 
   ENDMETHOD.
 
+
   METHOD fire_update.
 
     IF created = abap_true.
@@ -94,21 +98,6 @@ CLASS zcl_tvarvc_hier_node IMPLEMENTATION.
       history-changed_by = sy-uname.
       history-changed_on = sy-datum.
     ENDIF.
-
-  ENDMETHOD.
-
-
-  METHOD zif_tvarvc_hier_node~add_child.
-
-    DATA: child TYPE REF TO zcl_tvarvc_hier_node.
-
-    IF line_exists( children[ name = node->get_name( ) ] ).
-      RAISE EXCEPTION TYPE zcx_tvarvc_operation_failure.
-    ENDIF.
-
-    child ?= node.
-
-    children = VALUE #( BASE children ( id = child->id name = child->name ref = child ) ).
 
   ENDMETHOD.
 
@@ -136,7 +125,7 @@ CLASS zcl_tvarvc_hier_node IMPLEMENTATION.
     ENDIF.
 
     IF NOT cl_abap_matcher=>matches( pattern = naming_pattern text = name ).
-      RAISE EXCEPTION TYPE zcx_tvarvc_invalid_name.
+      RAISE EXCEPTION TYPE zcx_tvarvc_invalid_argument.
     ENDIF.
 
     IF line_exists( children[ name = name ] ).
@@ -271,6 +260,7 @@ CLASS zcl_tvarvc_hier_node IMPLEMENTATION.
 
   ENDMETHOD.
 
+
   METHOD zif_tvarvc_hier_node~is_leaf.
     leaf = xsdbool( children IS INITIAL ).
   ENDMETHOD.
@@ -320,7 +310,7 @@ CLASS zcl_tvarvc_hier_node IMPLEMENTATION.
     ENDIF.
 
     IF NOT cl_abap_matcher=>matches( pattern = naming_pattern text = new_name ).
-      RAISE EXCEPTION TYPE zcx_tvarvc_invalid_name.
+      RAISE EXCEPTION TYPE zcx_tvarvc_invalid_argument.
     ENDIF.
 
     " Sibling exists with that name?
@@ -371,6 +361,49 @@ CLASS zcl_tvarvc_hier_node IMPLEMENTATION.
       me->docu_xstring = docu_xstring.
       fire_update( changed = abap_true ).
     ENDIF.
+
+    self = me.
+
+  ENDMETHOD.
+
+
+  METHOD zif_tvarvc_hier_node~set_parent.
+
+    DATA: node              TYPE REF TO zcl_tvarvc_hier_node,
+          current_parent    TYPE REF TO zcl_tvarvc_hier_node,
+          casted_new_parent TYPE REF TO zcl_tvarvc_hier_node.
+
+    TRY.
+      casted_new_parent ?= new_parent.
+    CATCH cx_sy_move_cast_error.
+       " PARENT has incorrect type
+       RAISE EXCEPTION TYPE zcx_tvarvc_invalid_argument.
+    ENDTRY.
+
+    " Check cyclic reference
+    node = casted_new_parent.
+
+    WHILE node IS BOUND.
+
+      IF node = me.
+        RAISE EXCEPTION TYPE zcx_tvarvc_operation_failure.
+      ENDIF.
+
+      node ?= node->zif_tvarvc_hier_node~get_parent( ).
+
+    ENDWHILE.
+
+    " Child in to-be parent exists with that name?
+    IF line_exists( casted_new_parent->children[ name = name ] ).
+      RAISE EXCEPTION TYPE zcx_tvarvc_already_exists.
+    ENDIF.
+
+    " Movement from old parent to new one
+    DELETE parent->children WHERE name = name.
+    INSERT VALUE #( id = id name = name ref = me ) INTO TABLE casted_new_parent->children.
+    me->parent = casted_new_parent.
+
+    fire_update( changed = abap_true ).
 
     self = me.
 

@@ -77,6 +77,7 @@ CLASS application DEFINITION FINAL.
     DATA: screens          TYPE REF TO screen_collection,
           hier_manager     TYPE REF TO zif_tvarvc_hier_manager,
           ui_tree          TYPE REF TO cl_column_tree_model,
+          tree_dragdrop    TYPE REF TO cl_dragdrop,
           variable_handler TYPE REF TO zif_tvarvc_variable_collection,
           selopt_icons     TYPE selopt_icons_t,
           edit_mode_active TYPE abap_bool.
@@ -93,6 +94,22 @@ CLASS application DEFINITION FINAL.
 
     METHODS handle_expand_no_children FOR EVENT expand_no_children OF cl_column_tree_model
       IMPORTING node_key.
+
+
+    METHODS handle_drag FOR EVENT drag OF cl_column_tree_model
+      IMPORTING
+          drag_drop_object
+          node_key.
+
+    METHODS handle_drop FOR EVENT drop OF cl_column_tree_model
+      IMPORTING
+          drag_drop_object
+          node_key.
+
+    METHODS handle_drop_completed FOR EVENT drop_complete OF cl_column_tree_model
+      IMPORTING
+          drag_drop_object
+          node_key.
 
     METHODS init_ui_tree.
 
@@ -136,4 +153,10 @@ CLASS application DEFINITION FINAL.
       RETURNING
         VALUE(preview) TYPE vari_preview_t.
 
+ENDCLASS.
+
+CLASS drag_drop_info DEFINITION.
+  PUBLIC SECTION.
+    DATA: dragged_node TYPE REF TO zif_tvarvc_hier_node,
+          dropped_node TYPE REF TO zif_tvarvc_hier_node.
 ENDCLASS.

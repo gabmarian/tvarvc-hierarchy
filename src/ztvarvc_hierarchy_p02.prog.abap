@@ -150,7 +150,7 @@ CLASS screen_1200 IMPLEMENTATION.
 
         node->rename( name ).
 
-      CATCH zcx_tvarvc_invalid_name.
+      CATCH zcx_tvarvc_invalid_argument.
 
         MESSAGE 'Use only letters, numbers and underscore for names' TYPE 'E'.
 
@@ -217,7 +217,7 @@ CLASS screen_1300 IMPLEMENTATION.
         node->create_child( name       = name
                             attributes = attributes ).
 
-      CATCH zcx_tvarvc_invalid_name.
+      CATCH zcx_tvarvc_invalid_argument.
 
         MESSAGE 'Use only letters, numbers and underscore for names' TYPE 'E'.
 

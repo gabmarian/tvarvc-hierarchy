@@ -29,6 +29,18 @@
      <LANGU>E</LANGU>
      <DESCRIPT>Iteration Depth - Children</DESCRIPT>
     </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CLSNAME>ZIF_TVARVC_HIER_NODE_ITERATOR</CLSNAME>
+     <CMPNAME>GET_NEXT</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Get next node in the iteration</DESCRIPT>
+    </SEOCOMPOTX>
+    <SEOCOMPOTX>
+     <CLSNAME>ZIF_TVARVC_HIER_NODE_ITERATOR</CLSNAME>
+     <CMPNAME>RESET</CMPNAME>
+     <LANGU>E</LANGU>
+     <DESCRIPT>Set the iterator to its initial position</DESCRIPT>
+    </SEOCOMPOTX>
    </DESCRIPTIONS>
   </asx:values>
  </asx:abap>

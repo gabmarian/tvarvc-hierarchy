@@ -5,8 +5,9 @@ interface ZIF_TVARVC_HIER_MANAGER
   types:
     begin of node_id,
       node_id type ztvarvc_hier-node_id,
-    end of node_id,
-    node_ids TYPE SORTED TABLE OF node_id WITH UNIQUE KEY node_id.
+    end of node_id .
+  types:
+    node_ids TYPE SORTED TABLE OF node_id WITH UNIQUE KEY node_id .
 
   events SAVED
     exporting

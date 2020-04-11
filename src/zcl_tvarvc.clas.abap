@@ -34,8 +34,7 @@ public section.
         np TYPE tvarv_opti VALUE 'NP',
       END OF opti .
 
-  class-methods CLASS_CONSTRUCTOR.
-
+  class-methods CLASS_CONSTRUCTOR .
   class-methods GET_PARAMETER
     importing
       !NAME type CSEQUENCE
@@ -61,11 +60,14 @@ public section.
 ENDCLASS.
 
 
+
 CLASS ZCL_TVARVC IMPLEMENTATION.
+
 
   METHOD class_constructor.
     variables = NEW zcl_tvarvc_variable_collection( ).
   ENDMETHOD.
+
 
   METHOD get_list.
 
@@ -75,11 +77,13 @@ CLASS ZCL_TVARVC IMPLEMENTATION.
 
   ENDMETHOD.
 
+
   METHOD get_parameter.
 
     val = variables->get_parameter( name ).
 
   ENDMETHOD.
+
 
   METHOD get_select_option.
 
@@ -90,5 +94,4 @@ CLASS ZCL_TVARVC IMPLEMENTATION.
     ENDIF.
 
   ENDMETHOD.
-
 ENDCLASS.

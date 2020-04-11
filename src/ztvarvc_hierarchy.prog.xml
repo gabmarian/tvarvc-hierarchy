@@ -12,6 +12,7 @@
    <CUA>
     <ADM>
      <ACTCODE>000001</ACTCODE>
+     <MENCODE>000017</MENCODE>
      <PFKCODE>000001</PFKCODE>
     </ADM>
     <STA>
@@ -132,13 +133,119 @@
       <FUN_TEXT>Variable Values</FUN_TEXT>
       <ICON_TEXT>Variable Values</ICON_TEXT>
      </RSMPE_FUNT>
-     <RSMPE_FUNT>
-      <CODE>VARIABLES</CODE>
-      <TEXTNO>001</TEXTNO>
-      <TEXT_TYPE>S</TEXT_TYPE>
-      <FUN_TEXT>Variable</FUN_TEXT>
-     </RSMPE_FUNT>
     </FUN>
+    <MEN>
+     <RSMPE_MEN>
+      <CODE>000006</CODE>
+      <NO>01</NO>
+      <REF_TYPE>F</REF_TYPE>
+      <REF_CODE>TOGGLE</REF_CODE>
+      <REF_NO>001</REF_NO>
+     </RSMPE_MEN>
+     <RSMPE_MEN>
+      <CODE>000006</CODE>
+      <NO>02</NO>
+      <REF_TYPE>S</REF_TYPE>
+     </RSMPE_MEN>
+     <RSMPE_MEN>
+      <CODE>000006</CODE>
+      <NO>03</NO>
+      <REF_TYPE>F</REF_TYPE>
+      <REF_CODE>$SAVE</REF_CODE>
+      <REF_NO>001</REF_NO>
+     </RSMPE_MEN>
+     <RSMPE_MEN>
+      <CODE>000006</CODE>
+      <NO>04</NO>
+      <REF_TYPE>S</REF_TYPE>
+     </RSMPE_MEN>
+     <RSMPE_MEN>
+      <CODE>000006</CODE>
+      <NO>05</NO>
+      <REF_TYPE>F</REF_TYPE>
+      <REF_CODE>$EXIT</REF_CODE>
+      <REF_NO>001</REF_NO>
+     </RSMPE_MEN>
+     <RSMPE_MEN>
+      <CODE>000016</CODE>
+      <NO>01</NO>
+      <REF_TYPE>F</REF_TYPE>
+      <REF_CODE>ATTRIBUTES</REF_CODE>
+      <REF_NO>001</REF_NO>
+     </RSMPE_MEN>
+     <RSMPE_MEN>
+      <CODE>000016</CODE>
+      <NO>02</NO>
+      <REF_TYPE>F</REF_TYPE>
+      <REF_CODE>VARIABLE</REF_CODE>
+      <REF_NO>001</REF_NO>
+     </RSMPE_MEN>
+     <RSMPE_MEN>
+      <CODE>000016</CODE>
+      <NO>03</NO>
+      <REF_TYPE>F</REF_TYPE>
+      <REF_CODE>DOCUMENTATION</REF_CODE>
+      <REF_NO>001</REF_NO>
+     </RSMPE_MEN>
+     <RSMPE_MEN>
+      <CODE>000016</CODE>
+      <NO>04</NO>
+      <REF_TYPE>S</REF_TYPE>
+     </RSMPE_MEN>
+     <RSMPE_MEN>
+      <CODE>000016</CODE>
+      <NO>05</NO>
+      <REF_TYPE>F</REF_TYPE>
+      <REF_CODE>$FIND</REF_CODE>
+      <REF_NO>001</REF_NO>
+     </RSMPE_MEN>
+     <RSMPE_MEN>
+      <CODE>000016</CODE>
+      <NO>06</NO>
+      <REF_TYPE>S</REF_TYPE>
+     </RSMPE_MEN>
+     <RSMPE_MEN>
+      <CODE>000016</CODE>
+      <NO>07</NO>
+      <REF_TYPE>F</REF_TYPE>
+      <REF_CODE>$CANCEL</REF_CODE>
+      <REF_NO>001</REF_NO>
+     </RSMPE_MEN>
+    </MEN>
+    <MTX>
+     <RSMPE_MNLT>
+      <CODE>000006</CODE>
+      <TEXT_TYPE>S</TEXT_TYPE>
+      <TEXT>Hierarchy</TEXT>
+     </RSMPE_MNLT>
+     <RSMPE_MNLT>
+      <CODE>000016</CODE>
+      <TEXT_TYPE>S</TEXT_TYPE>
+      <TEXT>Edit</TEXT>
+     </RSMPE_MNLT>
+     <RSMPE_MNLT>
+      <CODE>000017</CODE>
+      <TEXT_TYPE>S</TEXT_TYPE>
+      <TEXT>Goto</TEXT>
+     </RSMPE_MNLT>
+    </MTX>
+    <ACT>
+     <RSMPE_ACT>
+      <CODE>000001</CODE>
+      <NO>01</NO>
+      <MENUCODE>000006</MENUCODE>
+     </RSMPE_ACT>
+     <RSMPE_ACT>
+      <CODE>000001</CODE>
+      <NO>02</NO>
+      <MENUCODE>000016</MENUCODE>
+     </RSMPE_ACT>
+     <RSMPE_ACT>
+      <CODE>000001</CODE>
+      <NO>03</NO>
+      <MENUCODE>000017</MENUCODE>
+     </RSMPE_ACT>
+    </ACT>
     <BUT>
      <RSMPE_BUT>
       <PFK_CODE>000001</PFK_CODE>
