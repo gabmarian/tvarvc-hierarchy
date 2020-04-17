@@ -1,18 +1,34 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<abapGit version="v1.0.0" serializer="LCL_OBJECT_PROG" serializer_version="v1.0.0">
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_FUGR" serializer_version="v1.0.0">
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
-   <PROGDIR>
-    <NAME>ZTVARVC_HIERARCHY</NAME>
-    <SUBC>1</SUBC>
-    <RLOAD>E</RLOAD>
-    <FIXPT>X</FIXPT>
-    <UCCHECK>X</UCCHECK>
-   </PROGDIR>
+   <AREAT>TVARVC Hierarchy User Interface</AREAT>
+   <INCLUDES>
+    <SOBJ_NAME>LZTVARVC_HIERARCHY_UID01</SOBJ_NAME>
+    <SOBJ_NAME>LZTVARVC_HIERARCHY_UID02</SOBJ_NAME>
+    <SOBJ_NAME>LZTVARVC_HIERARCHY_UID03</SOBJ_NAME>
+    <SOBJ_NAME>LZTVARVC_HIERARCHY_UID04</SOBJ_NAME>
+    <SOBJ_NAME>LZTVARVC_HIERARCHY_UID05</SOBJ_NAME>
+    <SOBJ_NAME>LZTVARVC_HIERARCHY_UIE01</SOBJ_NAME>
+    <SOBJ_NAME>LZTVARVC_HIERARCHY_UIP01</SOBJ_NAME>
+    <SOBJ_NAME>LZTVARVC_HIERARCHY_UIP02</SOBJ_NAME>
+    <SOBJ_NAME>LZTVARVC_HIERARCHY_UIP03</SOBJ_NAME>
+    <SOBJ_NAME>LZTVARVC_HIERARCHY_UIP04</SOBJ_NAME>
+    <SOBJ_NAME>LZTVARVC_HIERARCHY_UIP05</SOBJ_NAME>
+    <SOBJ_NAME>LZTVARVC_HIERARCHY_UIS01</SOBJ_NAME>
+    <SOBJ_NAME>LZTVARVC_HIERARCHY_UITOP</SOBJ_NAME>
+    <SOBJ_NAME>SAPLZTVARVC_HIERARCHY_UI</SOBJ_NAME>
+   </INCLUDES>
+   <FUNCTIONS>
+    <item>
+     <FUNCNAME>Z_TVARVC_HIERARCHY_UI_CALL</FUNCNAME>
+     <SHORT_TEXT>Call up TVARVC hierarchy maintenance</SHORT_TEXT>
+    </item>
+   </FUNCTIONS>
    <CUA>
     <ADM>
      <ACTCODE>000001</ACTCODE>
-     <MENCODE>000017</MENCODE>
+     <MENCODE>000003</MENCODE>
      <PFKCODE>000001</PFKCODE>
     </ADM>
     <STA>
@@ -136,76 +152,76 @@
     </FUN>
     <MEN>
      <RSMPE_MEN>
-      <CODE>000006</CODE>
+      <CODE>000001</CODE>
       <NO>01</NO>
       <REF_TYPE>F</REF_TYPE>
       <REF_CODE>TOGGLE</REF_CODE>
       <REF_NO>001</REF_NO>
      </RSMPE_MEN>
      <RSMPE_MEN>
-      <CODE>000006</CODE>
+      <CODE>000001</CODE>
       <NO>02</NO>
       <REF_TYPE>S</REF_TYPE>
      </RSMPE_MEN>
      <RSMPE_MEN>
-      <CODE>000006</CODE>
+      <CODE>000001</CODE>
       <NO>03</NO>
       <REF_TYPE>F</REF_TYPE>
       <REF_CODE>$SAVE</REF_CODE>
       <REF_NO>001</REF_NO>
      </RSMPE_MEN>
      <RSMPE_MEN>
-      <CODE>000006</CODE>
+      <CODE>000001</CODE>
       <NO>04</NO>
       <REF_TYPE>S</REF_TYPE>
      </RSMPE_MEN>
      <RSMPE_MEN>
-      <CODE>000006</CODE>
+      <CODE>000001</CODE>
       <NO>05</NO>
       <REF_TYPE>F</REF_TYPE>
       <REF_CODE>$EXIT</REF_CODE>
       <REF_NO>001</REF_NO>
      </RSMPE_MEN>
      <RSMPE_MEN>
-      <CODE>000016</CODE>
+      <CODE>000002</CODE>
       <NO>01</NO>
       <REF_TYPE>F</REF_TYPE>
       <REF_CODE>ATTRIBUTES</REF_CODE>
       <REF_NO>001</REF_NO>
      </RSMPE_MEN>
      <RSMPE_MEN>
-      <CODE>000016</CODE>
+      <CODE>000002</CODE>
       <NO>02</NO>
       <REF_TYPE>F</REF_TYPE>
       <REF_CODE>VARIABLE</REF_CODE>
       <REF_NO>001</REF_NO>
      </RSMPE_MEN>
      <RSMPE_MEN>
-      <CODE>000016</CODE>
+      <CODE>000002</CODE>
       <NO>03</NO>
       <REF_TYPE>F</REF_TYPE>
       <REF_CODE>DOCUMENTATION</REF_CODE>
       <REF_NO>001</REF_NO>
      </RSMPE_MEN>
      <RSMPE_MEN>
-      <CODE>000016</CODE>
+      <CODE>000002</CODE>
       <NO>04</NO>
       <REF_TYPE>S</REF_TYPE>
      </RSMPE_MEN>
      <RSMPE_MEN>
-      <CODE>000016</CODE>
+      <CODE>000002</CODE>
       <NO>05</NO>
       <REF_TYPE>F</REF_TYPE>
       <REF_CODE>$FIND</REF_CODE>
       <REF_NO>001</REF_NO>
      </RSMPE_MEN>
      <RSMPE_MEN>
-      <CODE>000016</CODE>
+      <CODE>000002</CODE>
       <NO>06</NO>
       <REF_TYPE>S</REF_TYPE>
      </RSMPE_MEN>
      <RSMPE_MEN>
-      <CODE>000016</CODE>
+      <CODE>000002</CODE>
       <NO>07</NO>
       <REF_TYPE>F</REF_TYPE>
       <REF_CODE>$CANCEL</REF_CODE>
@@ -214,17 +230,17 @@
     </MEN>
     <MTX>
      <RSMPE_MNLT>
-      <CODE>000006</CODE>
+      <CODE>000001</CODE>
       <TEXT_TYPE>S</TEXT_TYPE>
       <TEXT>Hierarchy</TEXT>
      </RSMPE_MNLT>
      <RSMPE_MNLT>
-      <CODE>000016</CODE>
+      <CODE>000002</CODE>
       <TEXT_TYPE>S</TEXT_TYPE>
       <TEXT>Edit</TEXT>
      </RSMPE_MNLT>
      <RSMPE_MNLT>
-      <CODE>000017</CODE>
+      <CODE>000003</CODE>
       <TEXT_TYPE>S</TEXT_TYPE>
       <TEXT>Goto</TEXT>
      </RSMPE_MNLT>
@@ -233,17 +249,17 @@
      <RSMPE_ACT>
       <CODE>000001</CODE>
       <NO>01</NO>
-      <MENUCODE>000006</MENUCODE>
+      <MENUCODE>000001</MENUCODE>
      </RSMPE_ACT>
      <RSMPE_ACT>
       <CODE>000001</CODE>
       <NO>02</NO>
-      <MENUCODE>000016</MENUCODE>
+      <MENUCODE>000002</MENUCODE>
      </RSMPE_ACT>
      <RSMPE_ACT>
       <CODE>000001</CODE>
       <NO>03</NO>
-      <MENUCODE>000017</MENUCODE>
+      <MENUCODE>000003</MENUCODE>
      </RSMPE_ACT>
     </ACT>
     <BUT>
@@ -465,22 +481,11 @@
     </DOC>
     <TIT>
      <RSMPE_TITT>
-      <CODE>HIER_DISPLAY</CODE>
-      <TEXT>Display TVARVC Hierarchy</TEXT>
-     </RSMPE_TITT>
-     <RSMPE_TITT>
       <CODE>HIER_MAINTENANCE</CODE>
-      <TEXT>Maintain TVARVC Hierarchy</TEXT>
+      <TEXT>&amp;1</TEXT>
      </RSMPE_TITT>
     </TIT>
    </CUA>
-   <TPOOL>
-    <item>
-     <ID>R</ID>
-     <ENTRY>Hierarchical Maintenance of TVARVC</ENTRY>
-     <LENGTH>34</LENGTH>
-    </item>
-   </TPOOL>
   </asx:values>
  </asx:abap>
 </abapGit>
